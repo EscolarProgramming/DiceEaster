@@ -1,0 +1,26 @@
+Bunny:
+   Skeleton:
+     head_textur_url1: "https://dl.dropboxusercontent.com/u/79646035/Heads/skin02.png"
+     head_textur_url2: "https://dl.dropboxusercontent.com/u/79646035/Heads/skin03.png"
+   spawn:
+     spawning: true
+     #Spawn Aggrisive Skeleton bunnys by spawning skeleton
+     spawnAgrissive: true
+     #Spawnrate 1 = 100%
+     spawnRate: 3
+     #BunnysDrop Items On Death
+     bunnysDropItems: true
+   items:
+    #Left Hand Items
+    #You can set random Items to ignore this option set the randomRange = 0;
+    leftHandNormal: 391
+    rightHandNormal: 0
+    leftHandRandom: 396
+    rightHandRandom: 264
+    randomRange: 5
+   onSpawn:
+    #Drop Items on Spawn ?
+    #You can set random Items to ignore this option set the dropRange = 0;
+    dropItem: 344
+    dropAmount: 20
+    dropRange: 5	

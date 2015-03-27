@@ -1,0 +1,7 @@
+database:
+  enable: false
+  host: 'localhost'
+  password: 123456789
+  username: 'root'
+  database: 'myAwesomeDatabase'
+  table: 'easter'

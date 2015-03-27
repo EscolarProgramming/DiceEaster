@@ -1,10 +1,11 @@
 name: DiceEaster
-version: 0.1
+version: 1.4.1
 description: DiceEaster
 author: Ste3et_C0st
 website: http://dicecraft.de
-
-main: me.Ste3et_C0st.DiceEaster.main
+depend: [Vault, HolographicDisplays]
+softdepend: [TitleManager, BarAPI]
+main: de.Ste3et_C0st.DiceEaster.main
 commands: 
   easter:
     description:  DiceEaster Egg Command

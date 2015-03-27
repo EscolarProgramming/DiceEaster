@@ -1,0 +1,5 @@
+TopList:
+   Header: "&6==================[&2TopList&6]=================="
+   Footer: "&6==========================================="
+   Message: "&6[@NR] [&2@PLAYERNAME&6] :&2 @EGGS"
+   AutoUpdate: false
