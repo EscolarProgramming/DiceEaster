@@ -1,0 +1,18 @@
+Message:
+  Header: '&7[&2Ostereier&7] '
+  NoPermissions: '&cDazu hast du keine Berechtigung'
+  RemoveEgg: Du kannst Ostereier Loeschen
+  GiveEgg: Du hast einen Stack Ostereier bekommen
+  EggDrop: Osterei:&c @NR &7plaziert
+  EggPickUp: Du hast &c@NR&7/&c@MAX &7Ostereier
+  EggRemove: Du hast das Ei:&2@EGG &7entfernt
+  NoMoreRemoveEggs: Du hast den Delete Modus verlassen
+  Already: Du besitzt dieses Ei bereits
+  WrongWorld: Du befindest dich in keiner Ostereier Welt
+  World: Du hast eine Ostereier Welt bestimmt
+  Win: Du hast &c@money &7Gold gewonnen
+  setWin: Du hast den Gewinn auf &c@money &7Gold gesetzt
+  WinWrong: Bitte benutze &2/easter setwin <double>
+  TopCommand: Bitte benutze &2/easter (@MAX-@MIN)
+  TopOutputStardet: Der Toplisten Output wird gestartet
+  TopOutputFinish: Die Topliste wurde ausgegeben

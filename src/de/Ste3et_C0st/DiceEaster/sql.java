@@ -24,17 +24,17 @@ public class sql {
 	    {
 			MySQLDatabase.executeQuery("CREATE DATABASE IF NOT EXISTS " + database, MySQLDatabase.getConnection(hostname, username, password));
 			MySQLDatabase.executeQuery("CREATE TABLE IF NOT EXISTS " + database + "." + table + " (uuid CHAR(40) UNIQUE, eggs CHAR(40))", MySQLDatabase.getConnection(host, username, psw));
-			main.getInstance().data = this;
+			DiceEaster.getInstance().data = this;
 	    }
 		catch (Exception e)
 	    {
-	      System.out.println("Couldnt connect with MySQL, disabling Nick v1.0 ...");Bukkit.getServer().getPluginManager().disablePlugin(main.getInstance());
+	      System.out.println("Couldnt connect with MySQL, disabling Nick v1.0 ...");Bukkit.getServer().getPluginManager().disablePlugin(DiceEaster.getInstance());
 	    }
 	}
 	
 	public void addPlayer(Player player){
 		UUID uuid = player.getUniqueId();
-		Integer eggs = main.getInstance().getPlayerScore(player);
+		Integer eggs = DiceEaster.getInstance().getPlayerScore(player);
 		String q = "INSERT INTO " + database + "." + table + " (uuid, eggs) VALUES (\"" + uuid.toString() + "\",\"" + eggs.toString() + "\") ON DUPLICATE KEY UPDATE eggs='" + eggs.toString()  + "'";
 		try {
 			MySQLDatabase.executeQuery(q, MySQLDatabase.getConnection(hostname, username, password));

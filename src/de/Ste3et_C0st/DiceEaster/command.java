@@ -18,7 +18,7 @@ public class command implements CommandExecutor {
 			if(cmd.getName().equalsIgnoreCase("easter")){
 				Player p = (Player) sender;
 				Boolean isInWorld = true;
-				if(!main.getInstance().world.contains(p.getWorld().getName())){isInWorld = false;}
+				if(!DiceEaster.getInstance().world.contains(p.getWorld().getName())){isInWorld = false;}
 				String help = "§2==================================\n";
 				if(isInWorld && p.hasPermission("Easter.Admin")){
 					help += "§2/easter give | §7You becom the Easter Eggs\n";
@@ -33,13 +33,13 @@ public class command implements CommandExecutor {
 					help += "§2/easter top (side) | §7Display TopTen\n";
 					}
 					
-					help += "§2Easter Eggs: §7" + main.egglist.size() + "\n";
+					help += "§2Easter Eggs: §7" + DiceEaster.egglist.size() + "\n";
 					help += "§2==================================";
 				}else if(!isInWorld && p.hasPermission("Easter.Admin")){
 					help += "§2/easter world\n";
 					help += "§2==================================";
 				}else if(isInWorld){
-					help += "§2Easter Eggs: §7" + main.getInstance().getPlayerScore(p) + "/" + main.egglist.size() + "\n";
+					help += "§2Easter Eggs: §7" + DiceEaster.getInstance().getPlayerScore(p) + "/" + DiceEaster.egglist.size() + "\n";
 					help += "§2==================================";
 				}else{
 					help = "";
@@ -54,63 +54,63 @@ public class command implements CommandExecutor {
 							new topTen(p, 1);
 							return true;
 						}else{
-							p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
+							p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
 							return true;
 						}
 					}else if(args[0].equalsIgnoreCase("world")){
 						if(p.hasPermission("Easter.Admin")){
-							main.getInstance().world.add(p.getWorld().getName());
-							p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("World"));
+							DiceEaster.getInstance().world.add(p.getWorld().getName());
+							p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("World"));
 							
-							main.getInstance().getConfig().set("DiceEasterEggs.Worlds", main.getInstance().world);
-							main.getInstance().saveConfig();
+							DiceEaster.getInstance().getConfig().set("DiceEasterEggs.Worlds", DiceEaster.getInstance().world);
+							DiceEaster.getInstance().saveConfig();
 							return true;
 						}else{
-							p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
+							p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
 							return true;
 						}
 					}else if(args[0].equalsIgnoreCase("info")){
 						if(p.hasPermission("Easter.Admin")){
-							main.getInstance().debug();
+							DiceEaster.getInstance().debug();
 							return true;
 						}else{
-							p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
+							p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
 							return true;
 						}
 					}else if(args[0].equalsIgnoreCase("give")){
 						if(p.hasPermission("Easter.Admin")){
-							ItemStack is = new ItemStack(main.getInstance().m);
+							ItemStack is = new ItemStack(DiceEaster.getInstance().m);
 							ItemMeta im = is.getItemMeta();
 							im.setDisplayName(variablen.msg.get("EggName"));
 							is.setItemMeta(im);
 							is.setAmount(64);
 							p.getInventory().addItem(is);
-							p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("GiveEgg"));
+							p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("GiveEgg"));
 							return true;
 						}else{
-							p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
+							p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
 							return true;
 						}
 					}else if(args[0].equalsIgnoreCase("remove")){
 						if(p.hasPermission("Easter.Admin")){
 							if(variablen.playerEisammler.contains(p)){
-								p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("NoMoreRemoveEggs"));
+								p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("NoMoreRemoveEggs"));
 								variablen.playerEisammler.remove(p);
 								return true;
 							}else{
 								variablen.playerEisammler.add(p);
-								p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("RemoveEgg"));
+								p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("RemoveEgg"));
 								return true;
 							}
 						}else{
-							p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
+							p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
 							return true;
 						}
 					}else if(args[0].equalsIgnoreCase("bunny")){
 						if(p.hasPermission("Easter.Admin")){
-							new Bunny(p.getLocation(), main.getInstance(), false);
+							new Bunny(p.getLocation(), DiceEaster.getInstance(), false);
 						}else{
-							p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
+							p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
 							return true;
 						}
 					}else{
@@ -120,24 +120,24 @@ public class command implements CommandExecutor {
 				}else if(args.length == 2){
 					if(args[0].equalsIgnoreCase("setwin")){
 						if(p.hasPermission("Easter.Admin")){
-							if(main.getInstance().isDouble(args[1])){
-								main.getInstance().Prize = Double.parseDouble(args[1]);
-								p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("setWin").replace("@money", args[1]));
+							if(DiceEaster.getInstance().isDouble(args[1])){
+								DiceEaster.getInstance().Prize = Double.parseDouble(args[1]);
+								p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("setWin").replace("@money", args[1]));
 								
-								main.getInstance().getConfig().set("DiceEasterEggs.Prize", main.getInstance().Prize);
-								main.getInstance().saveConfig();
+								DiceEaster.getInstance().getConfig().set("DiceEasterEggs.Prize", DiceEaster.getInstance().Prize);
+								DiceEaster.getInstance().saveConfig();
 								return true;
 							}else{
-								p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("WinWrong"));
+								p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("WinWrong"));
 								return true;
 							}
 						}else{
-							p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
+							p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
 							return true;
 						}
 					}else if(args[0].equalsIgnoreCase("top")){
 						if(p.hasPermission("Easter.Top")){
-							if(main.getInstance().isInt(args[1])){
+							if(DiceEaster.getInstance().isInt(args[1])){
 								new topTen(p, Integer.parseInt(args[1]));
 								return true;
 							}else if(args[1].equalsIgnoreCase("Output")){
@@ -145,14 +145,14 @@ public class command implements CommandExecutor {
 									new topTen(p, Integer.MAX_VALUE);
 									return true;
 								}else{
-									p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
+									p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
 									return true;
 								}
 							}else{
 								p.sendMessage(help);
 							}
 						}else{
-							p.sendMessage(main.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
+							p.sendMessage(DiceEaster.getInstance().getHeader() + variablen.msg.get("NoPermissions"));
 							return true;
 						}
 					}

@@ -3,9 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="C:/Plugins/jars/Vault.jar"/>
-	<classpathentry kind="lib" path="C:/Plugins/jars/spigot.jar"/>
 	<classpathentry kind="lib" path="C:/Plugins/jars/HolographicDisplays.jar"/>
 	<classpathentry kind="lib" path="C:/Plugins/jars/TitleManager-1.4.0.jar"/>
 	<classpathentry kind="lib" path="C:/Plugins/jars/BarAPI.jar"/>
+	<classpathentry kind="lib" path="C:/Plugins/jars/spigot.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

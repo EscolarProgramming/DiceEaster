@@ -1,0 +1,18 @@
+Message:
+  Header: '&7[&2Easter-Egg&7] '
+  NoPermissions: '&cYou don''t have Permissions'
+  RemoveEgg: You can remove Egg/s
+  GiveEgg: You become a Stack Easter Eggs
+  EggDrop: Easter Egg NR.:&c @NR &7placed
+  EggPickUp: You have &c@NR&7/&c@MAX &7Easter eggs
+  EggRemove: You remove the egg number &2@EGG
+  NoMoreRemoveEggs: You leave the remove mode
+  Already: You have already the egg
+  WrongWorld: You are not in the Easter Egg World
+  World: You set the Easter Egg World
+  Win: You win &c@money &7Gold
+  setWin: You set the win &c@money &7Gold
+  WinWrong: Please use &2/easter setwin <double>
+  TopCommand: Please usage &2/easter (@MAX-@MIN)
+  TopOutputStardet: toplist output stardet
+  TopOutputFinish: toplist output finish

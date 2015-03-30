@@ -1,0 +1,50 @@
+DiceEasterEggs:
+  Scoreboard:
+    Enabled: true
+  Worlds:
+  - world
+  EggName: '&2Easter-Egg'
+  #Prize:
+  #  - 'say @PLAYER has all @EGGS Eggs'
+  #  - 'give @PLAYER minecraft:diamond 1'
+  Prize: 10000.0
+  Message:
+    #EN_en = english
+    #DE_de = german
+    language: en_en
+    #Types:
+    #  Action = Actionbar (Requires TitleManager: http://www.spigotmc.org/resources/titlemanager.1049/)
+    #  Title = Title (Requires TitleManager: http://www.spigotmc.org/resources/titlemanager.1049/)
+    #  BarAPI = Enderdragon bar (Requires BarAPI: http://dev.bukkit.org/bukkit-plugins/bar-api/)
+    #  Chat = Player Chat
+    type: Chat
+  Item:
+    Material: 383
+    SubIDs:
+    - 50
+    - 51
+    - 52
+    - 54
+    - 55
+    - 56
+    - 57
+    - 58
+    - 59
+    - 60
+    - 61
+    - 62
+    - 65
+    - 66
+    - 67
+    - 68
+    - 101
+    - 90
+    - 91
+    - 92
+    - 93
+    - 94
+    - 95
+    - 96
+    - 98
+    - 100
+    - 120

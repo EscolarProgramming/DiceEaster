@@ -19,9 +19,9 @@ public class EggManager {
 	  private static FileConfiguration fc;
 	  @SuppressWarnings("deprecation")
 	  public static void saveEggs(){
-		  if(!main.egglist.isEmpty()){
+		  if(!DiceEaster.egglist.isEmpty()){
 			  World w = null;
-			  for(Egg egg : main.egglist){
+			  for(Egg egg : DiceEaster.egglist){
 				  if(w==null){w=egg.getWorld();}else if(!w.equals(egg.getWorld())){w=egg.getWorld();}
 				  cc = new config();
 				  String name = egg.getID() + ".yml";
@@ -60,29 +60,31 @@ public class EggManager {
 					Integer subID = fc.getInt("Egg.ItemStack.subbID");
 					ItemStack is = new ItemStack(Material.getMaterial(matID));
 					is.setDurability(subID.shortValue());
-					Hologram holo = main.getInstance().createHolo(loc, is);
-					Egg egg = new Egg(fc.getString("Egg.ID"), holo, w, loc, is, main.getInstance());
-					main.egglist.add(egg);
+					Hologram holo = DiceEaster.getInstance().createHolo(loc, is);
+					Egg egg = new Egg(fc.getString("Egg.ID"), holo, w, loc, is, DiceEaster.getInstance());
+					DiceEaster.egglist.add(egg);
 				}
 			}
 		}
 	} 
 	  
 	public static void killALL(){
-		if(!main.egglist.isEmpty()){
-		 for(Egg egg : main.egglist){
+		if(!DiceEaster.egglist.isEmpty()){
+		 for(Egg egg : DiceEaster.egglist){
 		  if(egg.isDebug()){egg.debug();}
 		  egg.getHologram().clearLines();
 		  egg.getHologram().delete();
 		 }
-		 main.egglist.clear();
+		 DiceEaster.egglist.clear();
 	}
 		  
-	if(!main.getInstance().scoreboards.isEmpty()){
-		for(Player player : main.getInstance().scoreboards.keySet()){
-			main.getInstance().scoreboards.get(player).destroy();
+	if(DiceEaster.getInstance().ScoreBoard){
+		if(!DiceEaster.getInstance().scoreboards.isEmpty()){
+			for(Player player : DiceEaster.getInstance().scoreboards.keySet()){
+				DiceEaster.getInstance().scoreboards.get(player).destroy();
+			}
+		  }
 		}
-	  }
 	}
 	
 	  public static void savePlayer(Player player){
@@ -92,8 +94,8 @@ public class EggManager {
 		  String folder = "/players";
 		  fc = cc.getConfig(name, folder);
 		  List<String> idLIst = new ArrayList<String>();
-		  if(!main.getInstance().playerEggs.isEmpty()){
-			  for(Egg egg : main.getInstance().playerEggs.get(player)){
+		  if(!DiceEaster.getInstance().playerEggs.isEmpty() && DiceEaster.getInstance().playerEggs.containsKey(player)){
+			  for(Egg egg : DiceEaster.getInstance().playerEggs.get(player)){
 				  idLIst.add(egg.getID());
 			  }
 			  fc.set("Eggs", idLIst);
@@ -109,13 +111,13 @@ public class EggManager {
 			  String folder = "/players";
 			  fc = cc.getConfig(name, folder);
 			  List<String> playerEggsLIst = (List<String>) fc.getList("Eggs");
-			  main.getInstance().playerEggs.put(player, getEggs(playerEggsLIst));
+			  DiceEaster.getInstance().playerEggs.put(player, getEggs(playerEggsLIst));
 		  }catch(Exception e){}
 	  }
 	  
 	  public static List<Egg> getEggs(List<String> list){
 		  List<Egg> eggs = new ArrayList<Egg>();
-		  for(Egg egg : main.egglist){
+		  for(Egg egg : DiceEaster.egglist){
 			  if(list.contains(egg.getID())){
 				  eggs.add(egg);
 			  }

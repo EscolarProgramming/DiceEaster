@@ -25,7 +25,7 @@ public class Bunny implements Listener{
 	Skeleton skeleton2;
 	Boolean aggrisive = false;
 	public Bunny(Location loc, Plugin plugin, Boolean b){
-		if(!main.getInstance().world.contains(loc.getWorld().getName())){return;}
+		if(!DiceEaster.getInstance().world.contains(loc.getWorld().getName())){return;}
 		
 		aggrisive = b;
 		skeleton1 = (Skeleton) loc.getWorld().spawnCreature(loc, EntityType.SKELETON);
@@ -34,26 +34,26 @@ public class Bunny implements Listener{
 		skeleton1.setPassenger(skeleton2);
 		skeleton2.setCustomName("Dinnerbone");
 		skeleton2.setCustomNameVisible(false);
-		ItemStack is1 = Skull.getCustomSkull(main.getInstance().link1);
-		ItemStack is2 = Skull.getCustomSkull(main.getInstance().link2);
+		ItemStack is1 = Skull.getCustomSkull(DiceEaster.getInstance().link1);
+		ItemStack is2 = Skull.getCustomSkull(DiceEaster.getInstance().link2);
 		skeleton1.getEquipment().setHelmet(is1);
 		skeleton2.getEquipment().setHelmet(is2);
 
-		setItem(skeleton1, main.getInstance().item1);
-		setItem(skeleton2, main.getInstance().item2);
+		setItem(skeleton1, DiceEaster.getInstance().item1);
+		setItem(skeleton2, DiceEaster.getInstance().item2);
 		
 		
-		if(main.getInstance().rndItemRange != 0){
-			if(main.rnd(0, main.getInstance().rndItemRange) == 1){
-				setItem(skeleton1, main.getInstance().rnd_item1);
-				setItem(skeleton2, main.getInstance().rnd_item2);
+		if(DiceEaster.getInstance().rndItemRange != 0){
+			if(DiceEaster.rnd(0, DiceEaster.getInstance().rndItemRange) == 1){
+				setItem(skeleton1, DiceEaster.getInstance().rnd_item1);
+				setItem(skeleton2, DiceEaster.getInstance().rnd_item2);
 			}
 		}
 		
-		if(main.getInstance().rndSpawnEggs != 0){
-			if(main.rnd(0, main.getInstance().rndSpawnEggs) == 1){
-				for(int i = 0; i<=main.getInstance().rndSpawnEggs; i++){
-					ItemStack is = new ItemStack(Material.getMaterial(main.getInstance().rndSpawnEggs), main.getInstance().rndAmount);
+		if(DiceEaster.getInstance().rndSpawnEggs != 0){
+			if(DiceEaster.rnd(0, DiceEaster.getInstance().rndSpawnEggs) == 1){
+				for(int i = 0; i<=DiceEaster.getInstance().rndSpawnEggs; i++){
+					ItemStack is = new ItemStack(Material.getMaterial(DiceEaster.getInstance().rndSpawnEggs), DiceEaster.getInstance().rndAmount);
 					ItemMeta im = is.getItemMeta();
 					im.setLore(Arrays.asList(variablen.createRandomRegistryId()));
 					is.setItemMeta(im);
@@ -62,7 +62,7 @@ public class Bunny implements Listener{
 			}
 		}
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
-		main.getInstance().bunnyList.add(this);
+		DiceEaster.getInstance().bunnyList.add(this);
 	}
 	
 	public void destroy(){
@@ -75,7 +75,7 @@ public class Bunny implements Listener{
 			skeleton.getEquipment().setItemInHand(new ItemStack(Material.getMaterial(integer)));
 		}else{
 			skeleton.getEquipment().setItemInHand(new ItemStack(Material.STONE));
-			Bukkit.getScheduler().runTaskLater(main.getInstance(), new Runnable() {
+			Bukkit.getScheduler().runTaskLater(DiceEaster.getInstance(), new Runnable() {
 			@Override
 			public void run() {skeleton2.getEquipment().setItemInHand(new ItemStack(Material.AIR));}}, 5);
 		}
@@ -83,12 +83,20 @@ public class Bunny implements Listener{
 
 	@EventHandler
 	public void onDie(EntityDeathEvent e){
-		if(e.getEntity().equals(skeleton2)){skeleton1.remove();}
-		if(e.getEntity().equals(skeleton1)){skeleton2.remove();}
-		e.getDrops().clear();
-		e.getDrops().add(skeleton1.getEquipment().getItemInHand());
-		e.getDrops().add(skeleton2.getEquipment().getItemInHand());
-		main.getInstance().bunnyList.remove(this);
+		Boolean diBunny = false;
+		Skeleton skeleton = null;
+		if(e.getEntity().equals(skeleton2) || e.getEntity().equals(skeleton1)){
+			skeleton = skeleton1;
+			diBunny=true;
+			skeleton1.remove();
+		}
+		if(diBunny){
+			e.getDrops().clear();
+			if(skeleton!=null && DiceEaster.getInstance().bunnysDropItems){
+				e.getDrops().add(skeleton1.getEquipment().getItemInHand());
+			}
+			DiceEaster.getInstance().bunnyList.remove(this);
+		}
 	}
 	
 	@EventHandler

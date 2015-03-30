@@ -7,21 +7,21 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import de.Ste3et_C0st.DiceEaster.Bunny;
-import de.Ste3et_C0st.DiceEaster.main;
+import de.Ste3et_C0st.DiceEaster.DiceEaster;
 
 public class EntitySpawn implements Listener {
 
 	@EventHandler
 	public void onSpawn(CreatureSpawnEvent e){
-		if(e.getEntityType().equals(EntityType.RABBIT) && e.getSpawnReason().equals(SpawnReason.NATURAL)){
-			if(main.rnd(0, main.getInstance().spawnRate) == 1){
-				new Bunny(e.getLocation(), main.getInstance(), false);
+		if(e.getEntityType().equals(EntityType.RABBIT) && e.getSpawnReason().equals(SpawnReason.DEFAULT)){
+			if(DiceEaster.rnd(0, DiceEaster.getInstance().spawnRate) == 1){
+				new Bunny(e.getLocation(), DiceEaster.getInstance(), false);
 			}
-		}else if(e.getEntityType().equals(EntityType.SKELETON) && e.getSpawnReason().equals(SpawnReason.NATURAL)){
-			if(main.getInstance().aggrisive){
-				new Bunny(e.getLocation(), main.getInstance(), true);
+		}else if(e.getEntityType().equals(EntityType.SKELETON) && e.getSpawnReason().equals(SpawnReason.DEFAULT)){
+			if(DiceEaster.getInstance().aggrisive){
+				new Bunny(e.getLocation(), DiceEaster.getInstance(), true);
 			}else{
-				new Bunny(e.getLocation(), main.getInstance(), false);
+				new Bunny(e.getLocation(), DiceEaster.getInstance(), false);
 			}
 		}
 	}

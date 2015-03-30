@@ -17,7 +17,7 @@ public class ScoreB {
 	Score hidden;
 	
 	public ScoreB(Player player){
-		if(main.getInstance().world.contains(player.getWorld().getName())){
+		if(DiceEaster.getInstance().world.contains(player.getWorld().getName())){
 			ScoreboardManager manager = Bukkit.getScoreboardManager();
 			Scoreboard board = manager.getNewScoreboard();
 			Team team = board.registerNewTeam("DE-" + player.getName().indexOf(0,7));
@@ -28,15 +28,15 @@ public class ScoreB {
 			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 			find = objective.getScore(variablen.msg.get("ScoreboardFind"));
 			hidden = objective.getScore(variablen.msg.get("ScoreboardHidden"));
-			find.setScore(main.getInstance().getPlayerScore(player));
-			hidden.setScore(main.egglist.size());
+			find.setScore(DiceEaster.getInstance().getPlayerScore(player));
+			hidden.setScore(DiceEaster.egglist.size());
 			player.setScoreboard(board);
 		}
 	}
 	
 	public void update(){
-		Integer hiddenEggs = main.egglist.size();
-		Integer foundEggs = main.getInstance().getPlayerScore(player);
+		Integer hiddenEggs = DiceEaster.egglist.size();
+		Integer foundEggs = DiceEaster.getInstance().getPlayerScore(player);
 		if(foundEggs > hiddenEggs) foundEggs = hiddenEggs;
 		
 		find.setScore(foundEggs);

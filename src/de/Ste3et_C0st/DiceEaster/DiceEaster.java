@@ -6,6 +6,7 @@ import io.puharesource.mc.titlemanager.api.TitleObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -41,7 +42,7 @@ import de.Ste3et_C0st.DiceEaster.Listener.PlayerJoin;
 import de.Ste3et_C0st.DiceEaster.Listener.PlayerKick;
 import de.Ste3et_C0st.DiceEaster.Listener.PlayerQuit;
 
-public class main extends JavaPlugin implements Listener
+public class DiceEaster extends JavaPlugin implements Listener
 {
   public String pl = "";
   private Economy econ = null;
@@ -67,7 +68,7 @@ public class main extends JavaPlugin implements Listener
   public Integer rndAmount = 20;
   public Integer rndSpawnEggsRange = 5;
   public Integer spawnRate = 3;
-  private static main Main;
+  private static DiceEaster Main;
   public Material m = null;
   public List<Short> eggs = new ArrayList<Short>();
   public List<Bunny> bunnyList = new ArrayList<Bunny>();
@@ -77,7 +78,7 @@ public class main extends JavaPlugin implements Listener
   public Boolean defaultConfig = false;
   public Boolean autoUpdate = false;
   private Boolean TitleManager = false;
-  private Boolean ScoreBoard = true;
+  public Boolean ScoreBoard = true;
   private Boolean Barapi = true;
   public sql database = null;
   public sql data = null;
@@ -144,6 +145,7 @@ public void onEnable()
     this.header = variablen.msg.get("Header");
     pl = variablen.msg.get("Header");
     EggManager.loadEggs();
+
     if(!Bukkit.getOnlinePlayers().isEmpty()){
     	for(Player player : Bukkit.getOnlinePlayers()){
     		EggManager.loadPlayer(player);
@@ -182,6 +184,12 @@ private void loadConfig()
 			@Override
 			public void onPickup(Player player) {
 				  if(!player.hasPermission("Easter.player")){return;}
+				  if(player.getInventory().getItemInHand()!=null){
+					  if(player.getInventory().getItemInHand().hasItemMeta() && player.getInventory().getItemInHand().getItemMeta().hasDisplayName() && 
+						 player.getInventory().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(variablen.msg.get("EggName"))){
+						  return;
+					  }
+				  }
 				  if(returnEGG(player) != null){
 					  Egg holo = returnEGG(player);
 					  if(!variablen.playerEisammler.contains(player)){
@@ -202,7 +210,7 @@ private void loadConfig()
 							  lastEgg.put(player, holo);
 							  updateScoreboard(player);
 							  if(autoUpdate){new topTen(null, Integer.MAX_VALUE);}
-							  if(main.getInstance().data != null){main.getInstance().data.addPlayer(player);}
+							  if(DiceEaster.getInstance().data != null){DiceEaster.getInstance().data.addPlayer(player);}
 							  if(playerHolos.size() >= egglist.size()){
 								  if(!commandList.isEmpty()){
 									  for(String cmd : commandList){
@@ -219,7 +227,7 @@ private void loadConfig()
 							  }
 							  
 								  if(sendMsg.equalsIgnoreCase("Action") && TitleManager){
-									  new ActionbarTitleObject(variablen.msg.get("ActionBarFind").replace("@NR", playerHolos.size() + 1 + "").replace("@MAX", egglist.size() + "")).send(player);
+									  new ActionbarTitleObject(variablen.msg.get("ActionBarFind").replace("@NR", playerHolos.size()+ "").replace("@MAX", egglist.size() + "")).send(player);
 								  }else if(sendMsg.equalsIgnoreCase("Title") && TitleManager){
 									  new TitleObject(variablen.msg.get("Title").replace("@NR", playerHolos.size() + "").replace("@MAX", egglist.size() + ""), 
 									  variablen.msg.get("SubTitle").replace("@NR", playerHolos.size()+ "").replace("@MAX", egglist.size() + "")).send(player);
@@ -326,7 +334,7 @@ private void loadConfig()
     int R = r.nextInt(High - Low) + Low;
     return R;
   }
-  public static main getInstance() {return Main;}
+  public static DiceEaster getInstance() {return Main;}
   public void debug(){
 	  if(!egglist.isEmpty()){
 		  for(Egg egg : egglist){
@@ -354,7 +362,16 @@ private void loadConfig()
   }
   public int getPlayerScore(Player player) {
 	if(!playerEggs.isEmpty()){
-		return playerEggs.get(player).size();
+		if(playerEggs.containsKey(player)){
+			return playerEggs.get(player).size();
+		}
+	}
+	return 0;
+}
+ 
+public int getEggs() {
+	if(!egglist.isEmpty()){
+		return egglist.size();
 	}
 	return 0;
 }

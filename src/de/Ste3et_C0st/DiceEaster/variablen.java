@@ -23,7 +23,7 @@ public class variablen
   
 	public static String createRandomRegistryId()
 	{  
-	    String val = main.getInstance().getName().substring(0,3);      
+	    String val = DiceEaster.getInstance().getName().substring(0,3);      
 	    int ranChar = 65 + (new Random()).nextInt(90-65);
 	    char ch = (char)ranChar;        
 	    val += ch;      

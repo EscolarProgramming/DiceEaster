@@ -43,7 +43,7 @@ public class topTen {
 			Integer maxSides = ceil((double)sortedMap.size()/(double)entryPerSide);
 			
 			if(side > maxSides){
-				player.sendMessage(main.getInstance().header + variablen.msg.get("TopCommand").replace("@MIN", "0").replace("@MAX", maxSides.toString()));
+				player.sendMessage(DiceEaster.getInstance().header + variablen.msg.get("TopCommand").replace("@MIN", "0").replace("@MAX", maxSides.toString()));
 				return;
 			}
 			
