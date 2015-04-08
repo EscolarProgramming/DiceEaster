@@ -6,7 +6,6 @@ import io.puharesource.mc.titlemanager.api.TitleObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -146,11 +145,9 @@ public void onEnable()
     pl = variablen.msg.get("Header");
     EggManager.loadEggs();
 
-    if(!Bukkit.getOnlinePlayers().isEmpty()){
-    	for(Player player : Bukkit.getOnlinePlayers()){
-    		EggManager.loadPlayer(player);
-    		updateScoreboard(player);
-    	}
+    for(Player p : Bukkit.getOnlinePlayers()){
+    	EggManager.loadPlayer(p);
+		updateScoreboard(p);
     }
     
     Bukkit.getPluginManager().registerEvents(new PlayerChangeWorld(), this);

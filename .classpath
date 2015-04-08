@@ -6,6 +6,6 @@
 	<classpathentry kind="lib" path="C:/Plugins/jars/HolographicDisplays.jar"/>
 	<classpathentry kind="lib" path="C:/Plugins/jars/TitleManager-1.4.0.jar"/>
 	<classpathentry kind="lib" path="C:/Plugins/jars/BarAPI.jar"/>
-	<classpathentry kind="lib" path="C:/Plugins/jars/spigot.jar"/>
+	<classpathentry kind="lib" path="C:/Plugins/jars/craftbukkit-1.8.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

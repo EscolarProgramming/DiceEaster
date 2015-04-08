@@ -15,6 +15,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.Plugin;
 
 
@@ -34,8 +35,18 @@ public class Bunny implements Listener{
 		skeleton1.setPassenger(skeleton2);
 		skeleton2.setCustomName("Dinnerbone");
 		skeleton2.setCustomNameVisible(false);
-		ItemStack is1 = Skull.getCustomSkull(DiceEaster.getInstance().link1);
-		ItemStack is2 = Skull.getCustomSkull(DiceEaster.getInstance().link2);
+		
+		ItemStack is1 = null;
+		ItemStack is2 = null;
+		
+		try{
+			is1 = Skull.getCustomSkull(DiceEaster.getInstance().link1);
+			is2 = Skull.getCustomSkull(DiceEaster.getInstance().link2);
+		}catch(Exception e){
+			is1 = Skull.getPlayerSkull("rabbit2077");
+			is2 = Skull.getPlayerSkull("bananasquad");
+		}
+		
 		skeleton1.getEquipment().setHelmet(is1);
 		skeleton2.getEquipment().setHelmet(is2);
 
