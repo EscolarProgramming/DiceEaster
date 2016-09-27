@@ -19,28 +19,28 @@ public class command implements CommandExecutor {
 				Player p = (Player) sender;
 				Boolean isInWorld = true;
 				if(!DiceEaster.getInstance().world.contains(p.getWorld().getName())){isInWorld = false;}
-				String help = "ง2==================================\n";
+				String help = "ยง2==================================\n";
 				if(isInWorld && p.hasPermission("Easter.Admin")){
-					help += "ง2/easter give | ง7You becom the Easter Eggs\n";
-					help += "ง2/easter remove | ง7You can Pickup one Easter Egg\n";
-					help += "ง2/easter info | ง7You become an Info about the Eggs\n";
-					help += "ง2/easter setwin <double> | ง7Set the win\n";
-					help += "ง2/easter world | ง7Set the World as Easter World\n";
-					help += "ง2/easter bunny | ง7Spawn easter Bunny\n";
+					help += "ยง2/easter give | ยง7You becom the Easter Eggs\n";
+					help += "ยง2/easter remove | ยง7You can Pickup one Easter Egg\n";
+					help += "ยง2/easter info | ยง7You become an Info about the Eggs\n";
+					help += "ยง2/easter setwin <double> | ยง7Set the win\n";
+					help += "ยง2/easter world | ยง7Set the World as Easter World\n";
+					help += "ยง2/easter bunny | ยง7Spawn easter Bunny\n";
 					if(p.hasPermission("Easter.Admin")){
-					help += "ง2/easter top (side/output) | ง7Display TopTen\n";
+					help += "ยง2/easter top (side/output) | ยง7Display TopTen\n";
 					}else{
-					help += "ง2/easter top (side) | ง7Display TopTen\n";
+					help += "ยง2/easter top (side) | ยง7Display TopTen\n";
 					}
 					
-					help += "ง2Easter Eggs: ง7" + DiceEaster.egglist.size() + "\n";
-					help += "ง2==================================";
+					help += "ยง2Easter Eggs: ยง7" + DiceEaster.egglist.size() + "\n";
+					help += "ยง2==================================";
 				}else if(!isInWorld && p.hasPermission("Easter.Admin")){
-					help += "ง2/easter world\n";
-					help += "ง2==================================";
+					help += "ยง2/easter world\n";
+					help += "ยง2==================================";
 				}else if(isInWorld){
-					help += "ง2Easter Eggs: ง7" + DiceEaster.getInstance().getPlayerScore(p) + "/" + DiceEaster.egglist.size() + "\n";
-					help += "ง2==================================";
+					help += "ยง2Easter Eggs: ยง7" + DiceEaster.getInstance().getPlayerScore(p) + "/" + DiceEaster.egglist.size() + "\n";
+					help += "ยง2==================================";
 				}else{
 					help = "";
 				}

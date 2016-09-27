@@ -109,11 +109,11 @@ public void onEnable()
       metrics.start();
     }
     catch (IOException localIOException) {}
-    if (!setupEconomy())
-    {
-      getServer().getPluginManager().disablePlugin(this);
-      return;
-    }
+//    if (!setupEconomy())
+//    {
+//      getServer().getPluginManager().disablePlugin(this);
+//      return;
+//    }
     if(Bukkit.getPluginManager().isPluginEnabled("TitleManager")){this.TitleManager = true;}
     if(Bukkit.getPluginManager().isPluginEnabled("BarAPI")){this.Barapi = true;}
     loadConfig();
@@ -181,9 +181,9 @@ private void loadConfig()
 			@Override
 			public void onPickup(Player player) {
 				  if(!player.hasPermission("Easter.player")){return;}
-				  if(player.getInventory().getItemInHand()!=null){
-					  if(player.getInventory().getItemInHand().hasItemMeta() && player.getInventory().getItemInHand().getItemMeta().hasDisplayName() && 
-						 player.getInventory().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(variablen.msg.get("EggName"))){
+				  if(player.getInventory().getItemInMainHand()!=null){
+					  if(player.getInventory().getItemInMainHand().hasItemMeta() && player.getInventory().getItemInMainHand().getItemMeta().hasDisplayName() && 
+						 player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equalsIgnoreCase(variablen.msg.get("EggName"))){
 						  return;
 					  }
 				  }
@@ -198,7 +198,7 @@ private void loadConfig()
 						  
 						  if(lastEgg.containsKey(player) && lastEgg.get(player).equals(holo)){return;}
 						  if(!playerHolos.contains(holo)){
-							  player.playSound(loc, Sound.ITEM_PICKUP, 1, 1);
+							  player.playSound(loc, Sound.ENTITY_ITEM_PICKUP, 1, 1);
 							  
 							  
 							  playerHolos.add(holo);
@@ -262,7 +262,7 @@ private void loadConfig()
 						  egglist.remove(egg);
 						  player.sendMessage(header + variablen.msg.get("EggRemove").replace("@EGG", id));
 						  new File("plugins/DiceEaster/Eggs/" + player.getWorld().getName() + "/" + id + ".yml").delete();
-						  player.playSound(player.getLocation(), Sound.FIZZ, 1, 1);
+						  player.playSound(player.getLocation(),Sound.BLOCK_NOTE_PLING, 1, 1);
 						  
 						  for(Player players : Bukkit.getOnlinePlayers()){
 							  updateScoreboard(players);
