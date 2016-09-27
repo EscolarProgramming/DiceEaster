@@ -109,11 +109,11 @@ public void onEnable()
       metrics.start();
     }
     catch (IOException localIOException) {}
-//    if (!setupEconomy())
-//    {
-//      getServer().getPluginManager().disablePlugin(this);
-//      return;
-//    }
+    if (!setupEconomy())
+    {
+      getServer().getPluginManager().disablePlugin(this);
+      return;
+    }
     if(Bukkit.getPluginManager().isPluginEnabled("TitleManager")){this.TitleManager = true;}
     if(Bukkit.getPluginManager().isPluginEnabled("BarAPI")){this.Barapi = true;}
     loadConfig();
